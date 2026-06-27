@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hicksville Printing — V2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white:   #ffffff;
+  --off:     #f5f2ed;
+  --stone:   #e8e3db;
+  --ink:     #111118;
+  --mid:     #6b6b75;
+  --amber:   #d4820a;
+  --amber-l: #f0a830;
+  --purple:  #2d1b69;
+  --warm:    #fdf8f0;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── CONTAINER ── */
+.wrap { max-width: 1152px; margin: 0 auto; padding: 0 28px; width: 100%; }
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--purple);
+  padding: 10px 0;
+  overflow: hidden;
+}
+.topbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.topbar-left {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,.55);
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+.topbar-left strong { color: var(--amber-l); }
+.topbar-right {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,.55);
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.topbar-right a { color: var(--amber-l); text-decoration: none; }
+
+/* ── NAV ── */
+nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--stone);
+  position: sticky;
+  top: 0;
+  z-index: 300;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+.logo-wrap { display: flex; align-items: center; gap: 14px; }
+.logo-stamp {
+  width: 42px; height: 42px;
+  background: var(--ink);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-stamp svg { width: 24px; height: 24px; fill: var(--amber-l); }
+.logo-text { line-height: 1.15; }
+.logo-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.logo-sub {
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+.nav-menu { display: flex; align-items: center; gap: 32px; }
+.nav-menu a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: .02em;
+  transition: color .2s;
+}
+.nav-menu a:hover { color: var(--ink); }
+.nav-phone {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--ink) !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+}
+.nav-btn {
+  background: var(--amber);
+  color: var(--white) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 2px;
+  transition: background .2s, transform .15s !important;
+}
+.nav-btn:hover { background: var(--amber-l) !important; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--warm);
+  border-bottom: 1px solid var(--stone);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 0;
+  align-items: stretch;
+  min-height: 82vh;
+}
+.hero-left {
+  padding: 72px 56px 72px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--stone);
+  position: relative;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--stone); }
+.hero-h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(52px, 6.5vw, 96px);
+  line-height: 1.0;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--amber);
+}
+.hero-rule { width: 48px; height: 3px; background: var(--amber); margin: 28px 0; }
+.hero-body {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 440px;
+  margin-bottom: 44px;
+}
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.cta-solid {
+  background: var(--ink);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 15px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+  display: inline-block;
+}
+.cta-solid:hover { background: var(--purple); transform: translateY(-2px); }
+.cta-ghost {
+  background: transparent;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  border: 1.5px solid var(--stone);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: border-color .2s, color .2s, transform .15s;
+  display: inline-block;
+}
+.cta-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+/* hero stamp — signature element */
+.hero-stamp {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  font-family: 'DM Serif Display', serif;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-stamp::before { content: ''; width: 24px; height: 1px; background: var(--stone); }
+
+/* hero right — stacked stat cards */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+}
+.stat-card {
+  flex: 1;
+  padding: 36px 40px;
+  border-bottom: 1px solid var(--stone);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background .2s;
+  cursor: default;
+}
+.stat-card:last-child { border-bottom: none; }
+.stat-card:hover { background: var(--ink); }
+.stat-card:hover .stat-tag { color: var(--amber-l); }
+.stat-card:hover .stat-num { color: var(--white); }
+.stat-card:hover .stat-label { color: rgba(255,255,255,.45); }
+.stat-card:hover .stat-note { color: rgba(255,255,255,.3); }
+.stat-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+  transition: color .2s;
+}
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  transition: color .2s;
+}
+.stat-num sup { font-size: 24px; vertical-align: top; margin-top: 10px; display: inline-block; }
+.stat-num sub { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 300; color: var(--mid); letter-spacing: 0; }
+.stat-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-top: 6px;
+  transition: color .2s;
+}
+.stat-note {
+  font-size: 11px;
+  color: var(--mid);
+  margin-top: 4px;
+  transition: color .2s;
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  background: var(--ink);
+  overflow: hidden;
+  padding: 14px 0;
+  border-top: 2px solid var(--amber);
+}
+.marquee-track {
+  display: inline-flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
+.marquee-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.marquee-item span { color: var(--amber-l); }
+.marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── SERVICES TAB SECTION ── */
+.services-section {
+  padding: 96px 0;
+  background: var(--white);
+}
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  gap: 24px;
+}
+.section-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+.section-h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.section-h2 em { font-style: italic; color: var(--mid); }
+.section-desc {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.7;
+  max-width: 320px;
+  text-align: right;
+}
+
+/* tab nav */
+.tab-nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--stone);
+  margin-bottom: 40px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--mid);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 14px 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-bottom: -1px;
+  transition: color .2s, border-color .2s;
+}
+.tab-btn.active { color: var(--ink); border-bottom-color: var(--amber); }
+.tab-btn:hover:not(.active) { color: var(--ink); }
+
+/* tab panels */
+.tab-panel { display: none; }
+.tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--stone); }
+.svc-item {
+  background: var(--white);
+  padding: 40px 36px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  transition: background .2s;
+  cursor: default;
+}
+.svc-item:hover { background: var(--warm); }
+.svc-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--stone);
+  flex-shrink: 0;
+  margin-top: 3px;
+  letter-spacing: .04em;
+}
+.svc-body {}
+.svc-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -.01em;
+}
+.svc-desc {
+  font-size: 13.5px;
+  color: var(--mid);
+  line-height: 1.65;
+}
+
+/* ── SPLIT PROMO ── */
+.promo-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 420px;
+}
+.promo-left {
+  background: var(--purple);
+  padding: 72px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.promo-left::after {
+  content: '★';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 260px;
+  color: rgba(255,255,255,.03);
+  line-height: 1;
+  pointer-events: none;
+}
+.promo-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--amber-l);
+  margin-bottom: 20px;
+}
+.promo-h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 3.5vw, 52px);
+  line-height: 1.05;
+  color: var(--white);
+  letter-spacing: -.02em;
+  margin-bottom: 20px;
+}
+.promo-h2 em { font-style: italic; color: var(--amber-l); }
+.promo-body {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,.55);
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 380px;
+}
+.promo-perks { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.promo-perks li {
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.promo-perks li::before { content: '✓'; color: var(--amber-l); font-size: 12px; font-weight: 700; }
+
+.promo-right {
+  background: var(--amber);
+  padding: 72px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.promo-price-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.45);
+  margin-bottom: 16px;
+}
+.big-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(72px, 9vw, 120px);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -.03em;
+  margin-bottom: 0;
+}
+.big-price sup { font-size: 40%; vertical-align: top; margin-top: .2em; display: inline-block; }
+.price-unit {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0,0,0,.5);
+  margin-bottom: 32px;
+  margin-top: 6px;
+}
+.price-detail {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: rgba(0,0,0,.45);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+.cta-dark {
+  background: var(--ink);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 15px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background .2s, transform .15s;
+}
+.cta-dark:hover { background: var(--purple); transform: translateY(-2px); }
+
+/* ── FOOTER INFO ── */
+.info-bar {
+  background: var(--off);
+  border-top: 1px solid var(--stone);
+  padding: 72px 0;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr;
+  gap: 60px;
+}
+.info-brand-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.info-brand-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 24px;
+}
+.info-address {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.9;
+}
+.info-address a { color: var(--amber); text-decoration: none; }
+.info-address a:hover { text-decoration: underline; }
+.info-contact-btns { display: flex; gap: 10px; margin-top: 24px; }
+
+.info-col-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--stone);
+}
+.hours-pair {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--mid);
+  margin-bottom: 10px;
+  gap: 16px;
+}
+.hours-pair .day { color: var(--ink); font-weight: 500; }
+.svc-list-v2 { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.svc-list-v2 li {
+  font-size: 13px;
+  color: var(--mid);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.svc-list-v2 li::before { content: '→'; color: var(--amber); font-size: 11px; }
+
+/* ── FOOTER BAR ── */
+.footer-bar {
+  background: var(--ink);
+  padding: 20px 0;
+}
+.footer-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.footer-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.3);
+}
+.footer-tagline {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(255,255,255,.25);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .hero-inner { grid-template-columns: 1fr; min-height: unset; }
+  .hero-left { padding: 56px 0 40px; border-right: none; border-bottom: 1px solid var(--stone); }
+  .hero-right { flex-direction: row; }
+  .stat-card { border-bottom: none; border-right: 1px solid var(--stone); }
+  .stat-card:last-child { border-right: none; }
+  .promo-split { grid-template-columns: 1fr; }
+  .info-grid { grid-template-columns: 1fr; gap: 36px; }
+  .tab-panel.active { grid-template-columns: 1fr; }
+  .section-header { flex-direction: column; align-items: flex-start; }
+  .section-desc { text-align: left; }
+  .footer-bar-inner { flex-direction: column; gap: 8px; text-align: center; }
+  .topbar-inner { flex-direction: column; gap: 4px; text-align: center; }
+}
+@media (max-width: 640px) {
+  .nav-menu a:not(.nav-btn):not(.nav-phone) { display: none; }
+  .hero-right { flex-direction: column; }
+  .stat-card { border-right: none; border-bottom: 1px solid var(--stone); }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="topbar-inner">
+      <p class="topbar-left">📍 545 South Broadway, Hicksville, NY 11801 &nbsp;·&nbsp; <strong>Open Mon–Fri 9AM–5:30PM</strong></p>
+      <p class="topbar-right"><a href="tel:5169331036">516-933-1036</a> &nbsp;·&nbsp; <a href="mailto:sales@hicksvilleprinting.net">sales@hicksvilleprinting.net</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap">
+    <div class="nav-inner">
+      <div class="logo-wrap">
+        <div class="logo-stamp">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 2h12v4H6zM4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm2 10h12v4H6z"/></svg>
+        </div>
+        <div class="logo-text">
+          <div class="logo-name">Hicksville Printing</div>
+          <div class="logo-sub">Printing · Copies · Graphic Design</div>
+        </div>
+      </div>
+      <div class="nav-menu">
+        <a href="#">Home</a>
+        <a href="#services">Services</a>
+        <a href="tel:5169331036" class="nav-phone">516-933-1036</a>
+        <a href="mailto:sales@hicksvilleprinting.net" class="nav-btn">Email Us</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+
+      <div class="hero-left">
+        <p class="hero-eyebrow">Hicksville, NY &nbsp;·&nbsp; Local Print Shop</p>
+        <h1 class="hero-h1">
+          Your Ideas,<br />
+          <em>Perfectly</em><br />
+          Printed.
+        </h1>
+        <div class="hero-rule"></div>
+        <p class="hero-body">From a single business card to a full bulk mailing campaign — we handle every print job with speed, precision, and prices that keep you coming back.</p>
+        <div class="hero-ctas">
+          <a href="mailto:sales@hicksvilleprinting.net" class="cta-solid">Get a Quote</a>
+          <a href="tel:5169331036" class="cta-ghost">Call Us Now</a>
+        </div>
+        <p class="hero-stamp">545 South Broadway &nbsp;·&nbsp; Hicksville, NY</p>
+      </div>
+
+      <div class="hero-right">
+        <div class="stat-card">
+          <p class="stat-tag">Color Copies</p>
+          <div class="stat-num"><sup>$</sup>0.18<sub>/copy</sub></div>
+          <p class="stat-label">Starting Price</p>
+          <p class="stat-note">Conditions apply</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-tag">Business Cards</p>
+          <div class="stat-num"><sup>$</sup>48</div>
+          <p class="stat-label">Per 1,000 Cards</p>
+          <p class="stat-note">4-Color · 2-Sided · Min 5,000</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-tag">Vinyl Banners</p>
+          <div class="stat-num"><sup>$</sup>5<sub>/sq ft</sub></div>
+          <p class="stat-label">Banner Special</p>
+          <p class="stat-note">Free shipping included</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>Color Copies</span> from $0.18 <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Business Cards</span> $48/1,000 <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Vinyl Banners</span> $5/sq ft · Free Shipping <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Same-Day</span> Signs &amp; Blueprints <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Bulk USPS</span> Mailing Available <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Graphic Design</span> Services <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Color Copies</span> from $0.18 <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Business Cards</span> $48/1,000 <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Vinyl Banners</span> $5/sq ft · Free Shipping <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Same-Day</span> Signs &amp; Blueprints <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Bulk USPS</span> Mailing Available <div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span>Graphic Design</span> Services <div class="marquee-dot"></div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="wrap">
+    <div class="section-header">
+      <div>
+        <p class="section-kicker">What We Offer</p>
+        <h2 class="section-h2">Every Print Job,<br /><em>Handled.</em></h2>
+      </div>
+      <p class="section-desc">From quick copies to complex campaigns — our full suite of services covers every printing need.</p>
+    </div>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab('copies')">Copies &amp; Print</button>
+      <button class="tab-btn" onclick="showTab('design')">Design &amp; Stationery</button>
+      <button class="tab-btn" onclick="showTab('signs')">Signs &amp; Banners</button>
+      <button class="tab-btn" onclick="showTab('mail')">Mailing &amp; More</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-copies">
+      <div class="svc-item">
+        <span class="svc-num">01</span>
+        <div class="svc-body">
+          <p class="svc-name">Color Copies</p>
+          <p class="svc-desc">Vibrant, full-color copies starting at just $0.18 each. Perfect for flyers, handouts, and marketing materials. Conditions apply.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">02</span>
+        <div class="svc-body">
+          <p class="svc-name">Black &amp; White Copies</p>
+          <p class="svc-desc">Fast, affordable B&amp;W printing for everyday documents, forms, reports, and internal communications.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">03</span>
+        <div class="svc-body">
+          <p class="svc-name">Newsletters &amp; Journals</p>
+          <p class="svc-desc">Professional newsletter and journal printing for schools, associations, and community organizations.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">04</span>
+        <div class="svc-body">
+          <p class="svc-name">Bulk High-Speed Scanning</p>
+          <p class="svc-desc">Convert large volumes of physical documents into digital files quickly and accurately.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-design">
+      <div class="svc-item">
+        <span class="svc-num">01</span>
+        <div class="svc-body">
+          <p class="svc-name">Graphic Design</p>
+          <p class="svc-desc">From logo concepts to fully print-ready files — our designers make your brand look sharp at every scale.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">02</span>
+        <div class="svc-body">
+          <p class="svc-name">Business Cards</p>
+          <p class="svc-desc">4-color, 2-sided business cards — 1,000 for just $48. Minimum order of 5,000 with the same artwork.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">03</span>
+        <div class="svc-body">
+          <p class="svc-name">Letterheads &amp; Envelopes</p>
+          <p class="svc-desc">Branded stationery that keeps every communication looking professional — letterheads, envelopes, and office forms.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">04</span>
+        <div class="svc-body">
+          <p class="svc-name">Custom Invitations</p>
+          <p class="svc-desc">Beautifully crafted invitations for weddings, parties, graduations, corporate events, and every special occasion.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-signs">
+      <div class="svc-item">
+        <span class="svc-num">01</span>
+        <div class="svc-body">
+          <p class="svc-name">Vinyl Banners</p>
+          <p class="svc-desc">High-quality vinyl banners at $5/sq ft with free shipping. Prepayment and print-ready artwork required.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">02</span>
+        <div class="svc-body">
+          <p class="svc-name">Custom Signs — Same Day</p>
+          <p class="svc-desc">Need it fast? Our 24×36 sign special is available same-day. Perfect for storefronts, events, and urgent campaigns.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">03</span>
+        <div class="svc-body">
+          <p class="svc-name">Blueprints &amp; Architectural Drawings</p>
+          <p class="svc-desc">Large-format blueprints and architectural drawings printed same-day — reliable turnaround for tight project deadlines.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">04</span>
+        <div class="svc-body">
+          <p class="svc-name">Posters &amp; Display Prints</p>
+          <p class="svc-desc">Eye-catching large-format prints for retail displays, trade shows, events, and indoor signage.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-mail">
+      <div class="svc-item">
+        <span class="svc-num">01</span>
+        <div class="svc-body">
+          <p class="svc-name">Bulk USPS Mailing</p>
+          <p class="svc-desc">Full-service direct mail — from design and printing through addressing, sorting, and delivery with discounted USPS postage.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">02</span>
+        <div class="svc-body">
+          <p class="svc-name">Designing to Mailing</p>
+          <p class="svc-desc">We handle the entire campaign: layout, print, and mail. One vendor, start to finish.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">03</span>
+        <div class="svc-body">
+          <p class="svc-name">Discounted USPS Postage</p>
+          <p class="svc-desc">Save on bulk postage rates through our USPS-certified mailing services — more reach for less cost.</p>
+        </div>
+      </div>
+      <div class="svc-item">
+        <span class="svc-num">04</span>
+        <div class="svc-body">
+          <p class="svc-name">Addressing &amp; Sorting</p>
+          <p class="svc-desc">Automated addressing and presort services to ensure your mail qualifies for the lowest postage rates available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT PROMO -->
+<div class="promo-split">
+  <div class="promo-left">
+    <p class="promo-tag">★ Limited Offer</p>
+    <h2 class="promo-h2">Vinyl Banners<br />for <em>$5/sq ft</em></h2>
+    <p class="promo-body">High-quality, durable vinyl banners — printed to your exact specs and shipped free. Perfect for storefronts, trade shows, and events of any size.</p>
+    <ul class="promo-perks">
+      <li>Free shipping on every order</li>
+      <li>Prepayment required</li>
+      <li>Print-ready artwork required</li>
+    </ul>
+  </div>
+  <div class="promo-right">
+    <p class="promo-price-tag">Banner Special — Price Per Sq Ft</p>
+    <div class="big-price"><sup>$</sup>5</div>
+    <p class="price-unit">per square foot</p>
+    <p class="price-detail">
+      FREE SHIPPING INCLUDED<br />
+      PREPAYMENT REQUIRED<br />
+      PRINT-READY ART REQUIRED
+    </p>
+    <a href="mailto:sales@hicksvilleprinting.net" class="cta-dark">Get a Quote</a>
+  </div>
+</div>
+
+<!-- INFO -->
+<div class="info-bar">
+  <div class="wrap">
+    <div class="info-grid">
+      <div>
+        <div class="info-brand-name">Hicksville Printing</div>
+        <div class="info-brand-sub">Printing · Copies · Graphic Design</div>
+        <p class="info-address">
+          545 South Broadway<br />
+          Hicksville, NY 11801<br /><br />
+          <a href="tel:5169331036">516-933-1036</a><br />
+          <a href="mailto:sales@hicksvilleprinting.net">sales@hicksvilleprinting.net</a>
+        </p>
+        <div class="info-contact-btns">
+          <a href="mailto:sales@hicksvilleprinting.net" class="cta-solid" style="font-size:11px; padding:12px 22px;">Email Us</a>
+          <a href="tel:5169331036" class="cta-ghost" style="font-size:11px; padding:11px 20px;">Call Us</a>
+        </div>
+      </div>
+
+      <div>
+        <p class="info-col-title">Hours</p>
+        <div class="hours-pair"><span class="day">Mon – Fri</span><span>9:00 AM – 5:30 PM</span></div>
+        <div class="hours-pair"><span class="day">Saturday</span><span>9:00 AM – 1:00 PM</span></div>
+        <div class="hours-pair"><span class="day">Sunday</span><span>By Appointment</span></div>
+      </div>
+
+      <div>
+        <p class="info-col-title">Services</p>
+        <ul class="svc-list-v2">
+          <li>Printing</li>
+          <li>Copies</li>
+          <li>Graphic Design</li>
+          <li>Banners &amp; Signs</li>
+          <li>Business Cards</li>
+          <li>Bulk USPS Mailing</li>
+          <li>Blueprints</li>
+          <li>Custom Invitations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER BAR -->
+<div class="footer-bar">
+  <div class="wrap">
+    <div class="footer-bar-inner">
+      <p class="footer-copy">© 2026 Hicksville Printing. All Rights Reserved. · 545 South Broadway, Hicksville, NY 11801</p>
+      <p class="footer-tagline">Print. Done Right.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`#tab-${id}`).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>
