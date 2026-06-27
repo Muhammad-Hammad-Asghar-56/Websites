@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hicksville Printing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<!-- Flaticon uicons -->
+<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css" />
+<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css" />
+<style>
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --white:    #ffffff;
+  --off:      #f5f2ed;
+  --stone:    #e8e3db;
+  --ink:      #111118;
+  --mid:      #6b6b75;
+  --amber:    #d4820a;
+  --amber-l:  #f0a830;
+  --purple:   #2d1b69;
+  --purple-m: #3d2a85;
+  --warm:     #fdf8f0;
+  --radius:   3px;
+  --ease:     .22s ease;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ─── WRAP ─── */
+.wrap { max-width: 1152px; margin: 0 auto; padding: 0 28px; width: 100%; }
+
+/* ══════════════════════════════════════════
+   1. ANNOUNCEMENT BANNER
+══════════════════════════════════════════ */
+.ann-bar {
+  background: var(--purple);
+  overflow: hidden;
+  position: relative;
+}
+.ann-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,.03) 80px, rgba(255,255,255,.03) 81px);
+  pointer-events: none;
+}
+
+/* scrolling ticker */
+.ann-track-wrap { overflow: hidden; padding: 11px 0; position: relative; z-index: 1; }
+.ann-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: ann-scroll 28s linear infinite;
+}
+.ann-track:hover { animation-play-state: paused; }
+.ann-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--amber-l);
+  padding: 0 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.ann-item .sep {
+  color: rgba(255,255,255,.25);
+  font-weight: 400;
+  font-size: 14px;
+}
+.ann-item .dim { color: rgba(255,255,255,.45); font-weight: 400; }
+@keyframes ann-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ══════════════════════════════════════════
+   2. NAVBAR
+══════════════════════════════════════════ */
+.navbar {
+  background: var(--white);
+  border-bottom: 2px solid var(--stone);
+  position: sticky;
+  top: 0;
+  z-index: 600;
+  box-shadow: 0 2px 16px rgba(17,17,24,.07);
+}
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  gap: 16px;
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo-icon {
+  width: 42px; height: 42px;
+  background: var(--ink);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nav-logo-icon i { font-size: 20px; color: var(--amber-l); }
+.nav-logo-text { line-height: 1.2; }
+.nav-logo-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px;
+  color: var(--ink);
+  display: block;
+}
+.nav-logo-tag {
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--mid);
+  display: block;
+}
+
+/* Desktop links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 9px 16px;
+  border-radius: var(--radius);
+  color: var(--ink);
+  transition: background var(--ease), color var(--ease);
+}
+.nav-links a:hover { background: var(--off); color: var(--amber); }
+.nav-links a.active { color: var(--amber); }
+.nav-links a i { font-size: 14px; }
+
+.nav-links .nav-btn-email {
+  background: var(--amber);
+  color: var(--white);
+  padding: 9px 20px;
+}
+.nav-links .nav-btn-email:hover { background: var(--amber-l); color: var(--ink); }
+.nav-links .nav-btn-dir {
+  background: var(--purple);
+  color: var(--white);
+}
+.nav-links .nav-btn-dir:hover { background: var(--purple-m); color: var(--white); }
+
+/* Hamburger */
+.nav-ham {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius);
+  color: var(--ink);
+  transition: background var(--ease);
+  flex-shrink: 0;
+}
+.nav-ham:hover { background: var(--off); }
+.nav-ham i { font-size: 22px; display: block; }
+
+/* Mobile drawer */
+.nav-drawer {
+  display: none;
+  flex-direction: column;
+  background: var(--white);
+  border-top: 1px solid var(--stone);
+  padding: 12px 0 16px;
+}
+.nav-drawer.open { display: flex; }
+.nav-drawer a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 13px 28px;
+  border-bottom: 1px solid var(--stone);
+  transition: background var(--ease), color var(--ease);
+}
+.nav-drawer a:last-child { border-bottom: none; }
+.nav-drawer a:hover { background: var(--off); color: var(--amber); }
+.nav-drawer a i { font-size: 16px; color: var(--amber); }
+/* Drawer plain links */
+.nav-drawer .drawer-home,
+.nav-drawer .drawer-dir { color: var(--ink); }
+.nav-drawer .drawer-home:hover,
+.nav-drawer .drawer-dir:hover { background: var(--off); color: var(--amber); }
+
+/* Side-by-side CTA row */
+.drawer-cta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--stone);
+}
+.drawer-cta-row a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 17px 12px;
+  border-bottom: none;
+  border-right: 1px solid rgba(255,255,255,.15);
+  transition: filter var(--ease);
+}
+.drawer-cta-row a:last-child { border-right: none; }
+.drawer-cta-row a:hover { filter: brightness(1.13); }
+.drawer-cta-row a i { font-size: 15px; }
+.drawer-cta-email { background: var(--amber); color: var(--white) !important; }
+.drawer-cta-call  { background: var(--purple); color: var(--white) !important; }
+
+/* ══════════════════════════════════════════
+   3. HERO — VIDEO CAROUSEL
+══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 88vh;
+  min-height: 500px;
+  max-height: 900px;
+  overflow: hidden;
+  background: var(--ink);
+}
+.hero-video {
+  position: absolute;
+  inset: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: .3;
+  z-index: 0;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(17,17,24,.82) 0%, rgba(45,27,105,.55) 50%, rgba(17,17,24,.78) 100%);
+  z-index: 1;
+}
+.hero-overlay-btm {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 180px;
+  background: linear-gradient(to top, rgba(17,17,24,.92), transparent);
+  z-index: 2;
+}
+.slides-wrap {
+  position: relative; width: 100%; height: 100%; z-index: 3;
+}
+.slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+  pointer-events: none;
+}
+.slide.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.slide-content { max-width: 660px; }
+.slide-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber-l); margin-bottom: 16px;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.slide-kicker::before, .slide-kicker::after {
+  content: ''; width: 24px; height: 1px;
+  background: var(--amber-l); opacity: .5; display: block;
+}
+.slide-h {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 6vw, 76px);
+  line-height: 1.05; color: var(--white); letter-spacing: -.02em; margin-bottom: 10px;
+}
+.slide-h em { font-style: italic; color: var(--amber-l); display: block; }
+.slide-sub {
+  font-size: clamp(13px, 1.8vw, 16px);
+  font-weight: 300; color: rgba(255,255,255,.55); line-height: 1.6;
+}
+.slide-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(52px, 9vw, 104px);
+  color: var(--amber-l); line-height: 1; letter-spacing: -.02em;
+  margin: 8px 0 6px;
+}
+.slide-price sup { font-size: 44%; vertical-align: top; margin-top: .2em; display: inline-block; }
+.slide-price sub { font-family: 'Inter', sans-serif; font-size: 28%; font-weight: 300; letter-spacing: 0; color: rgba(255,255,255,.45); }
+.slide-cond {
+  font-family: 'Space Mono', monospace; font-size: 9.5px;
+  letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-top: 4px;
+}
+/* Dots */
+.hero-dots {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  z-index: 10; display: flex; gap: 8px; align-items: center;
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,.22); border: none; cursor: pointer; padding: 0;
+  transition: background var(--ease), transform var(--ease);
+}
+.dot.active { background: var(--amber-l); transform: scale(1.35); }
+/* Arrows */
+.hero-arr {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+  color: var(--white); width: 46px; height: 46px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 20px; line-height: 1;
+  transition: background var(--ease), border-color var(--ease);
+}
+.hero-arr:hover { background: var(--amber); border-color: var(--amber); }
+.hero-arr.prev { left: 20px; }
+.hero-arr.next { right: 20px; }
+/* CTA row */
+.hero-ctas {
+  position: absolute; bottom: 68px; left: 50%; transform: translateX(-50%);
+  z-index: 10; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+}
+.btn-hero-solid {
+  background: var(--amber); color: var(--ink);
+  font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  padding: 13px 28px; border-radius: var(--radius); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: background var(--ease), transform var(--ease);
+}
+.btn-hero-solid:hover { background: var(--amber-l); transform: translateY(-2px); }
+.btn-hero-ghost {
+  background: transparent; color: var(--white);
+  font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 12px 26px; border: 1.5px solid rgba(255,255,255,.32); border-radius: var(--radius);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+  transition: border-color var(--ease), color var(--ease), transform var(--ease);
+}
+.btn-hero-ghost:hover { border-color: var(--amber-l); color: var(--amber-l); transform: translateY(-2px); }
+.btn-hero-solid i, .btn-hero-ghost i { font-size: 14px; }
+
+/* ══════════════════════════════════════════
+   4. PROMO — VINYL BANNERS (full-bleed split)
+══════════════════════════════════════════ */
+.promo-section {
+  /* No background here — children handle their own full-bleed bg */
+  display: flex;
+  min-height: 460px;
+  position: relative;
+  border-top: 1px solid var(--stone);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* The two halves stretch edge-to-edge */
+.promo-half {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+/* LEFT half — warm/off-white */
+.promo-half-left {
+  background: var(--warm);
+  justify-content: flex-end; /* push content toward center */
+}
+.promo-content {
+  width: 100%;
+  max-width: 576px; /* half of max-width 1152 */
+  padding: 68px 48px 68px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* RIGHT half — deep purple, full bleed to edge */
+.promo-half-right {
+  background: var(--purple);
+  position: relative;
+  overflow: hidden;
+  justify-content: flex-start; /* push content toward center */
+}
+.promo-half-right::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(61,42,133,.8) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(240,168,48,.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+/* Decorative large text watermark */
+.promo-half-right::after {
+  content: '$5';
+  position: absolute;
+  right: -20px; bottom: -40px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 320px;
+  line-height: 1;
+  color: rgba(255,255,255,.04);
+  letter-spacing: -.05em;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+.promo-price-content {
+  width: 100%;
+  max-width: 576px; /* other half of 1152 */
+  padding: 68px 28px 68px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+/* Left content styles */
+.promo-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.promo-eyebrow i { font-size: 12px; }
+.promo-h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 3.8vw, 52px);
+  line-height: 1.05; letter-spacing: -.02em; color: var(--ink); margin-bottom: 16px;
+}
+.promo-h2 em { font-style: italic; color: var(--amber); }
+.promo-desc {
+  font-size: 15px; font-weight: 300; color: var(--mid);
+  line-height: 1.75; margin-bottom: 26px; max-width: 400px;
+}
+.promo-perks { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 34px; }
+.promo-perks li {
+  font-size: 14px; color: var(--ink);
+  display: flex; align-items: center; gap: 10px;
+}
+.promo-perks li i {
+  font-size: 13px; color: var(--white);
+  background: var(--amber); border-radius: 50%;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.promo-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-promo-primary {
+  background: var(--amber); color: var(--white);
+  font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  padding: 14px 30px; border-radius: var(--radius); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: background var(--ease), transform var(--ease);
+}
+.btn-promo-primary:hover { background: var(--amber-l); color: var(--ink); transform: translateY(-2px); }
+.btn-promo-secondary {
+  background: transparent; color: var(--ink);
+  font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 13px 26px; border: 1.5px solid var(--stone); border-radius: var(--radius);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+  transition: border-color var(--ease), color var(--ease), transform var(--ease);
+}
+.btn-promo-secondary:hover { border-color: var(--ink); transform: translateY(-2px); }
+.btn-promo-primary i, .btn-promo-secondary i { font-size: 14px; }
+
+/* Right price styles */
+.price-badge {
+  background: var(--amber); color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px;
+  display: inline-block; margin-bottom: 22px;
+}
+.price-lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.4); margin-bottom: 6px;
+}
+.big-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(88px, 12vw, 144px);
+  line-height: 1; color: var(--amber-l); letter-spacing: -.03em;
+  margin-bottom: 4px;
+}
+.big-price sup { font-size: 38%; vertical-align: top; margin-top: .22em; display: inline-block; }
+.price-per {
+  font-size: 14px; color: rgba(255,255,255,.4); letter-spacing: .06em; margin-bottom: 28px;
+}
+.price-rule { width: 48px; height: 2px; background: rgba(255,255,255,.15); margin-bottom: 22px; }
+.price-notes {
+  font-size: 13px; color: rgba(255,255,255,.45); line-height: 2;
+}
+.price-notes strong { color: var(--amber-l); font-weight: 500; }
+
+/* ══════════════════════════════════════════
+   5. FOOTER
+══════════════════════════════════════════ */
+.footer { background: var(--ink); padding: 72px 0 0; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 56px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.footer-brand-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px; color: var(--white); letter-spacing: -.01em; margin-bottom: 4px;
+}
+.footer-brand-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--mid); margin-bottom: 22px;
+}
+.footer-address { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.95; }
+.footer-address a { color: var(--amber-l); text-decoration: none; }
+.footer-address a:hover { text-decoration: underline; }
+.footer-ctas { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+.btn-foot-solid {
+  background: var(--amber); color: var(--ink);
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  padding: 11px 20px; border-radius: var(--radius); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: background var(--ease), transform var(--ease);
+}
+.btn-foot-solid:hover { background: var(--amber-l); transform: translateY(-1px); }
+.btn-foot-ghost {
+  background: transparent; color: rgba(255,255,255,.6);
+  font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 10px 18px; border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  transition: border-color var(--ease), color var(--ease), transform var(--ease);
+}
+.btn-foot-ghost:hover { border-color: var(--amber-l); color: var(--amber-l); transform: translateY(-1px); }
+.btn-foot-solid i, .btn-foot-ghost i { font-size: 13px; }
+.foot-col-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 20px; padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.foot-hours-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13.5px; color: rgba(255,255,255,.5); margin-bottom: 12px; gap: 12px;
+}
+.foot-hours-row .day { color: rgba(255,255,255,.82); font-weight: 500; flex-shrink: 0; }
+.foot-svc-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.foot-svc-list li {
+  font-size: 13.5px; color: rgba(255,255,255,.5);
+  display: flex; align-items: center; gap: 10px;
+  transition: color var(--ease);
+}
+.foot-svc-list li:hover { color: var(--amber-l); cursor: default; }
+.foot-svc-list li i { font-size: 12px; color: var(--amber); flex-shrink: 0; }
+.foot-bar { padding: 20px 0; }
+.foot-bar-inner {
+  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+}
+.foot-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: .06em; color: rgba(255,255,255,.25);
+}
+.foot-nav { display: flex; gap: 22px; }
+.foot-nav a {
+  font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+  color: rgba(255,255,255,.28); text-decoration: none;
+  transition: color var(--ease);
+}
+.foot-nav a:hover { color: var(--amber-l); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Nav — hide desktop links, burger, and drawer entirely on mobile */
+  .nav-links { display: none; }
+  .nav-ham { display: none; }
+  .nav-drawer { display: none !important; }
+
+  /* Promo — stack vertically */
+  .promo-section { flex-direction: column; }
+  .promo-half { flex: none; }
+  .promo-half-left { justify-content: flex-start; }
+  .promo-half-right { justify-content: flex-start; }
+  .promo-content { max-width: 100%; padding: 52px 28px 40px; }
+  .promo-price-content { max-width: 100%; padding: 48px 28px 52px; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+  .foot-bar-inner { flex-direction: column; gap: 10px; text-align: center; }
+  .foot-nav { justify-content: center; flex-wrap: wrap; gap: 16px; }
+}
+
+@media (max-width: 480px) {
+  .hero { height: 72vh; min-height: 420px; }
+  .hero-ctas { bottom: 56px; }
+  .hero-arr { width: 38px; height: 38px; font-size: 17px; }
+  .hero-arr.prev { left: 10px; }
+  .hero-arr.next { right: 10px; }
+  .btn-hero-solid, .btn-hero-ghost { padding: 12px 18px; font-size: 11px; }
+  .ann-item { font-size: 10px; padding: 0 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     1. ANNOUNCEMENT BANNER — scrolling ticker
+══════════════════════════════════════════ -->
+<div class="ann-bar">
+  <div class="ann-track-wrap">
+    <div class="ann-track">
+      <!-- First set -->
+      <span class="ann-item">
+        <i class="fi fi-sr-print" style="font-size:12px;"></i>
+        4 Color Business Card Special
+        <span class="sep">·</span>
+        <span class="dim">$48 / 1000</span>
+        <span class="sep">·</span>
+        <span class="dim">2-Sided · Min 5,000 Same Artwork</span>
+      </span>
+      <span class="ann-item">
+        <i class="fi fi-sr-tags" style="font-size:12px;"></i>
+        Color Copies Starting At $0.18
+        <span class="sep">·</span>
+        <span class="dim">Conditions Apply</span>
+      </span>
+      <span class="ann-item">
+        <i class="fi fi-sr-flag" style="font-size:12px;"></i>
+        Vinyl Banners $5 / sq ft
+        <span class="sep">·</span>
+        <span class="dim">Free Shipping Included</span>
+      </span>
+      <span class="ann-item">
+        <i class="fi fi-sr-clock" style="font-size:12px;"></i>
+        Same-Day Signs & Blueprints
+        <span class="sep">·</span>
+        <span class="dim">Walk-Ins Welcome</span>
+      </span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ann-item">
+        <i class="fi fi-sr-print" style="font-size:12px;"></i>
+        4 Color Business Card Special
+        <span class="sep">·</span>
+        <span class="dim">$48 / 1000</span>
+        <span class="sep">·</span>
+        <span class="dim">2-Sided · Min 5,000 Same Artwork</span>
+      </span>
+      <span class="ann-item">
+        <i class="fi fi-sr-tags" style="font-size:12px;"></i>
+        Color Copies Starting At $0.18
+        <span class="sep">·</span>
+        <span class="dim">Conditions Apply</span>
+      </span>
+      <span class="ann-item">
+        <i class="fi fi-sr-flag" style="font-size:12px;"></i>
+        Vinyl Banners $5 / sq ft
+        <span class="sep">·</span>
+        <span class="dim">Free Shipping Included</span>
+      </span>
+      <span class="ann-item">
+        <i class="fi fi-sr-clock" style="font-size:12px;"></i>
+        Same-Day Signs & Blueprints
+        <span class="sep">·</span>
+        <span class="dim">Walk-Ins Welcome</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     2. NAVBAR
+══════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="wrap">
+    <div class="navbar-inner">
+
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <i class="fi fi-sr-print"></i>
+        </div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Hicksville Printing</span>
+          <span class="nav-logo-tag">Printing · Copies · Graphic Design · 516-933-1036</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#" class="active">
+          <i class="fi fi-rr-home"></i> Home
+        </a>
+        <a href="mailto:sales@hicksvilleprinting.net" class="nav-btn-email">
+          <i class="fi fi-rr-envelope"></i> Email Us
+        </a>
+        <a href="https://www.google.com/maps/search/545+South+Broadway+Hicksville+NY+11801" target="_blank" rel="noopener" class="nav-btn-dir">
+          <i class="fi fi-rr-marker"></i> Directions
+        </a>
+      </div>
+
+      <button class="nav-ham" id="hamBtn" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fi fi-rr-bars-staggered" id="hamIcon"></i>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <a href="#" class="drawer-home">
+      <i class="fi fi-rr-home"></i> Home
+    </a>
+    <a href="https://www.google.com/maps/search/545+South+Broadway+Hicksville+NY+11801" target="_blank" rel="noopener" class="drawer-dir">
+      <i class="fi fi-rr-marker"></i> Directions
+    </a>
+    <!-- Side-by-side CTA row -->
+    <div class="drawer-cta-row">
+      <a href="mailto:sales@hicksvilleprinting.net" class="drawer-cta-email">
+        <i class="fi fi-rr-envelope"></i> Email Us
+      </a>
+      <a href="tel:5169331036" class="drawer-cta-call">
+        <i class="fi fi-rr-phone-call"></i> Call Us
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     3. HERO — VIDEO CAROUSEL
+══════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://magical-empanada-812698.netlify.app/slideshow-bg.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-btm"></div>
+
+  <div class="slides-wrap" id="slidesWrap">
+
+    <div class="slide active">
+      <div class="slide-content">
+        <p class="slide-kicker">Color Printing</p>
+        <h2 class="slide-h">Color Copies<em>Starting At</em></h2>
+        <div class="slide-price"><sup>$</sup>0.18<sub>/copy</sub></div>
+        <p class="slide-cond">Conditions Apply</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-content">
+        <p class="slide-kicker">Signage & Display</p>
+        <h2 class="slide-h">Custom Signs<em>&amp; Banners</em></h2>
+        <p class="slide-sub">Sign Special 24×36 — Available Same-Day</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-content">
+        <p class="slide-kicker">Publications</p>
+        <h2 class="slide-h">Newsletters<em>&amp; Journals</em></h2>
+        <p class="slide-sub">For Schools and Associations</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-content">
+        <p class="slide-kicker">Creative Services</p>
+        <h2 class="slide-h">Graphic<em>Designing</em></h2>
+        <p class="slide-sub">Printing · Letterheads · Envelopes · Office Forms</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-content">
+        <p class="slide-kicker">Business Essentials</p>
+        <h2 class="slide-h">Business Card<em>Special</em></h2>
+        <div class="slide-price"><sup>$</sup>48<sub>/1000</sub></div>
+        <p class="slide-cond">2-Sided · Minimum 5,000 Same Artwork</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-content">
+        <p class="slide-kicker">Special Occasions</p>
+        <h2 class="slide-h">Custom<em>Invitations</em></h2>
+        <p class="slide-sub">Beautifully crafted for every special occasion</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-content">
+        <p class="slide-kicker">Copy & Scan</p>
+        <h2 class="slide-h">B&amp;W Copies<em>&amp; Scanning</em></h2>
+        <p class="slide-sub">Bulk high-speed scanning services available</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-content">
+        <p class="slide-kicker">Large Format</p>
+        <h2 class="slide-h">Blue Printing<em>&amp; Architectural</em></h2>
+        <p class="slide-sub">Architectural drawings — same-day service</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-content">
+        <p class="slide-kicker">Direct Mail</p>
+        <h2 class="slide-h">Bulk USPS<em>Mailing</em></h2>
+        <p class="slide-sub">From designing to mailing · Discounted USPS postage</p>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="hero-arr prev" onclick="moveSlide(-1)" aria-label="Previous">&#8249;</button>
+  <button class="hero-arr next" onclick="moveSlide(1)"  aria-label="Next">&#8250;</button>
+  <div class="hero-dots" id="heroDots"></div>
+
+  <div class="hero-ctas">
+    <a href="mailto:sales@hicksvilleprinting.net" class="btn-hero-solid">
+      <i class="fi fi-rr-envelope"></i> Email Us
+    </a>
+    <a href="tel:5169331036" class="btn-hero-ghost">
+      <i class="fi fi-rr-phone-call"></i> 516-933-1036
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     4. PROMO — VINYL BANNERS
+══════════════════════════════════════════ -->
+<section class="promo-section" id="promo">
+
+  <!-- LEFT — warm content -->
+  <div class="promo-half promo-half-left">
+    <div class="promo-content">
+      <p class="promo-eyebrow">
+        <i class="fi fi-sr-star"></i> Limited Time Offer
+      </p>
+      <h2 class="promo-h2">Vinyl Banner<br /><em>Special</em></h2>
+      <p class="promo-desc">High-quality, full-color vinyl banners built to last — indoors or out. Perfect for storefronts, events, trade shows, and grand openings.</p>
+      <ul class="promo-perks">
+        <li><i class="fi fi-sr-check"></i> Free shipping on every order</li>
+        <li><i class="fi fi-sr-check"></i> Prepayment required to place order</li>
+        <li><i class="fi fi-sr-check"></i> Ready-to-print artwork required</li>
+      </ul>
+      <div class="promo-btns">
+        <a href="mailto:sales@hicksvilleprinting.net" class="btn-promo-primary">
+          <i class="fi fi-rr-envelope"></i> Order Now
+        </a>
+        <a href="tel:5169331036" class="btn-promo-secondary">
+          <i class="fi fi-rr-phone-call"></i> Call for Details
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — purple price panel, full bleed to edge -->
+  <div class="promo-half promo-half-right">
+    <div class="promo-price-content">
+      <span class="price-badge">★ Special Offer</span>
+      <p class="price-lbl">Vinyl Banners — Starting At</p>
+      <div class="big-price"><sup>$</sup>5</div>
+      <p class="price-per">per square foot</p>
+      <div class="price-rule"></div>
+      <p class="price-notes">
+        <strong>Free Shipping</strong> included<br />
+        Prepayment &amp; print-ready<br />
+        artwork required
+      </p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════
+     5. FOOTER
+══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+
+      <div>
+        <div class="footer-brand-name">Hicksville Printing</div>
+        <div class="footer-brand-sub">Printing · Copies · Graphic Design</div>
+        <div class="footer-address">
+          545 South Broadway<br />
+          Hicksville, NY 11801<br /><br />
+          Phone: <a href="tel:5169331036">516-933-1036</a><br />
+          Email: <a href="mailto:sales@hicksvilleprinting.net">sales@hicksvilleprinting.net</a>
+        </div>
+        <div class="footer-ctas">
+          <a href="mailto:sales@hicksvilleprinting.net" class="btn-foot-solid">
+            <i class="fi fi-rr-envelope"></i> Email Us
+          </a>
+          <a href="tel:5169331036" class="btn-foot-ghost">
+            <i class="fi fi-rr-phone-call"></i> Call Us
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <p class="foot-col-title">Hours</p>
+        <div class="foot-hours-row"><span class="day">Mon – Fri</span><span>9:00 AM – 5:30 PM</span></div>
+        <div class="foot-hours-row"><span class="day">Saturday</span><span>9:00 AM – 1:00 PM</span></div>
+        <div class="foot-hours-row"><span class="day">Sunday</span><span>By Appointment</span></div>
+      </div>
+
+      <div>
+        <p class="foot-col-title">Services</p>
+        <ul class="foot-svc-list">
+          <li><i class="fi fi-rr-print"></i> Printing</li>
+          <li><i class="fi fi-rr-copy-alt"></i> Copies</li>
+          <li><i class="fi fi-rr-pen-nib"></i> Graphic Design</li>
+          <li><i class="fi fi-rr-flag"></i> Banners &amp; Signs</li>
+          <li><i class="fi fi-rr-id-card-clip-alt"></i> Business Cards &amp; More</li>
+          <li><i class="fi fi-rr-envelope-bulk"></i> Bulk USPS Mailing</li>
+          <li><i class="fi fi-rr-blueprint"></i> Blueprints</li>
+          <li><i class="fi fi-rr-party-bell"></i> Custom Invitations</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="foot-bar">
+      <div class="foot-bar-inner">
+        <p class="foot-copy">© 2026 Hicksville Printing. All Rights Reserved.</p>
+        <nav class="foot-nav" aria-label="Footer navigation">
+          <a href="#">Home</a>
+          <a href="mailto:sales@hicksvilleprinting.net">Email Us</a>
+          <a href="https://www.google.com/maps/search/545+South+Broadway+Hicksville+NY+11801" target="_blank" rel="noopener">Directions</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════ -->
+<script>
+/* ── Hamburger ── */
+(function () {
+  const btn    = document.getElementById('hamBtn');
+  const drawer = document.getElementById('navDrawer');
+  const icon   = document.getElementById('hamIcon');
+  btn.addEventListener('click', function () {
+    const open = drawer.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    icon.className = open ? 'fi fi-rr-cross' : 'fi fi-rr-bars-staggered';
+  });
+  // Close when a drawer link is clicked
+  drawer.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      drawer.classList.remove('open');
+      btn.setAttribute('aria-expanded', false);
+      icon.className = 'fi fi-rr-bars-staggered';
+    });
+  });
+})();
+
+/* ── Carousel ── */
+(function () {
+  const slides  = document.querySelectorAll('.slide');
+  const dotsEl  = document.getElementById('heroDots');
+  let cur = 0, timer;
+
+  slides.forEach(function (_, i) {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.addEventListener('click', function () { goTo(i); });
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+    reset();
+  }
+  function reset() {
+    clearInterval(timer);
+    timer = setInterval(function () { goTo(cur + 1); }, 5000);
+  }
+
+  window.moveSlide = function (d) { goTo(cur + d); };
+  reset();
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  goTo(cur - 1);
+    if (e.key === 'ArrowRight') goTo(cur + 1);
+  });
+
+  const hero = document.getElementById('hero');
+  hero.addEventListener('mouseenter', function () { clearInterval(timer); });
+  hero.addEventListener('mouseleave', reset);
+})();
+</script>
+</body>
+</html>
