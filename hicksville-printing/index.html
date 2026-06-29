@@ -16,14 +16,15 @@ html { scroll-behavior: smooth; }
 
 :root {
   --white:    #ffffff;
-  --off:      #f5f2ed;
-  --stone:    #e8e3db;
-  --ink:      #111118;
-  --mid:      #6b6b75;
-  --amber:    #d4820a;
-  --amber-l:  #f0a830;
-  --purple:   #2d1b69;
-  --purple-m: #3d2a85;
+  --off:      #fff8f2;
+  --stone:    #f0e8df;
+  --ink:      #1c1c1c;
+  --mid:      #6b6b6b;
+  --orange:   #e8750a;
+  --orange-l: #f59332;
+  --orange-d: #c45f00;
+  --blue:     #3b82c4;
+  --blue-l:   #5b9fd4;
   --radius:   3px;
   --ease:     .22s ease;
 }
@@ -41,7 +42,7 @@ body {
    ANNOUNCEMENT BANNER
 ══════════════════════════ */
 .ann-bar {
-  background: var(--purple);
+  background: var(--orange);
   padding: 11px 0;
   text-align: center;
   position: relative;
@@ -60,7 +61,7 @@ body {
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--amber-l);
+  color: var(--white);
   position: relative;
   z-index: 1;
   display: inline-flex;
@@ -70,7 +71,7 @@ body {
   justify-content: center;
 }
 .ann-bar p .sep {
-  color: rgba(255,255,255,.3);
+  color: rgba(255,255,255,.5);
   font-weight: 400;
 }
 
@@ -79,7 +80,7 @@ body {
 ══════════════════════════ */
 .navbar {
   background: var(--white);
-  border-bottom: 2px solid var(--stone);
+  border-bottom: 3px solid var(--orange);
   position: sticky;
   top: 0;
   z-index: 600;
@@ -103,12 +104,12 @@ body {
 }
 .nav-logo-icon {
   width: 42px; height: 42px;
-  background: var(--ink);
+  background: #1c1c1c;
   border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-.nav-logo-icon i { font-size: 20px; color: var(--amber-l); }
+.nav-logo-icon i { font-size: 20px; color: var(--orange-l); }
 .nav-logo-text { line-height: 1.2; }
 .nav-logo-name {
   font-family: 'DM Serif Display', serif;
@@ -144,20 +145,20 @@ body {
   color: var(--ink);
   transition: background var(--ease), color var(--ease);
 }
-.nav-links a:hover { background: var(--off); color: var(--amber); }
-.nav-links a.active { color: var(--amber); }
+.nav-links a:hover { background: var(--off); color: var(--orange); }
+.nav-links a.active { color: var(--orange); }
 .nav-links a i { font-size: 14px; }
 .nav-links .nav-btn-email {
-  background: var(--amber);
+  background: var(--orange);
   color: var(--white);
   padding: 9px 20px;
 }
-.nav-links .nav-btn-email:hover { background: var(--amber-l); color: var(--ink); }
+.nav-links .nav-btn-email:hover { background: var(--orange-l); color: var(--ink); }
 .nav-links .nav-btn-dir {
-  background: var(--purple);
+  background: var(--blue);
   color: var(--white);
 }
-.nav-links .nav-btn-dir:hover { background: var(--purple-m); color: var(--white); }
+.nav-links .nav-btn-dir:hover { background: var(--blue-l); color: var(--white); }
 
 /* Mobile hamburger — hidden on mobile per requirements */
 .nav-ham { display: none; }
@@ -183,13 +184,13 @@ body {
 }
 .hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(17,17,24,.82) 0%, rgba(45,27,105,.55) 50%, rgba(17,17,24,.78) 100%);
+  background: linear-gradient(135deg, rgba(28,28,28,.88) 0%, rgba(232,117,10,.30) 50%, rgba(28,28,28,.85) 100%);
   z-index: 1;
 }
 .hero-overlay-btm {
   position: absolute; bottom: 0; left: 0; right: 0;
   height: 180px;
-  background: linear-gradient(to top, rgba(17,17,24,.92), transparent);
+  background: linear-gradient(to top, rgba(28,28,28,.92), transparent);
   z-index: 2;
 }
 .slides-wrap {
@@ -211,7 +212,7 @@ body {
   font-size: clamp(36px, 6vw, 76px);
   line-height: 1.08; color: var(--white); letter-spacing: -.02em;
 }
-.slide-h em { font-style: italic; color: var(--amber-l); display: block; }
+.slide-h em { font-style: italic; color: var(--orange-l); display: block; }
 .slide-sub {
   font-size: clamp(13px, 1.8vw, 16px);
   font-weight: 300; color: rgba(255,255,255,.55); line-height: 1.6;
@@ -220,7 +221,7 @@ body {
 .slide-price {
   font-family: 'DM Serif Display', serif;
   font-size: clamp(52px, 9vw, 104px);
-  color: var(--amber-l); line-height: 1; letter-spacing: -.02em;
+  color: var(--white); line-height: 1; letter-spacing: -.02em;
   margin: 10px 0 6px;
 }
 .slide-price sup { font-size: 44%; vertical-align: top; margin-top: .2em; display: inline-block; }
@@ -240,7 +241,7 @@ body {
   cursor: pointer; font-size: 22px; line-height: 1;
   transition: background var(--ease), border-color var(--ease);
 }
-.hero-arr:hover { background: var(--amber); border-color: var(--amber); }
+.hero-arr:hover { background: var(--orange); border-color: var(--orange); }
 .hero-arr.prev { left: 20px; }
 .hero-arr.next { right: 20px; }
 
@@ -254,7 +255,7 @@ body {
   background: rgba(255,255,255,.22); border: none; cursor: pointer; padding: 0;
   transition: background var(--ease), transform var(--ease);
 }
-.dot.active { background: var(--amber-l); transform: scale(1.35); }
+.dot.active { background: var(--orange-l); transform: scale(1.35); }
 
 /* Hero CTA row */
 
@@ -281,17 +282,17 @@ body {
   color: var(--mid); margin-bottom: 22px;
 }
 .footer-address { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.95; }
-.footer-address a { color: var(--amber-l); text-decoration: none; }
+.footer-address a { color: var(--orange-l); text-decoration: none; }
 .footer-address a:hover { text-decoration: underline; }
 .footer-ctas { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
 .btn-foot-solid {
-  background: var(--amber); color: var(--ink);
+  background: var(--orange); color: var(--ink);
   font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
   padding: 11px 20px; border-radius: var(--radius); text-decoration: none;
   display: inline-flex; align-items: center; gap: 6px;
   transition: background var(--ease), transform var(--ease);
 }
-.btn-foot-solid:hover { background: var(--amber-l); transform: translateY(-1px); }
+.btn-foot-solid:hover { background: var(--orange-l); transform: translateY(-1px); }
 .btn-foot-ghost {
   background: transparent; color: rgba(255,255,255,.6);
   font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
@@ -299,12 +300,14 @@ body {
   text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
   transition: border-color var(--ease), color var(--ease), transform var(--ease);
 }
-.btn-foot-ghost:hover { border-color: var(--amber-l); color: var(--amber-l); transform: translateY(-1px); }
+.btn-foot-ghost:hover { border-color: var(--orange-l); color: var(--orange-l); transform: translateY(-1px); }
 .btn-foot-solid i, .btn-foot-ghost i { font-size: 13px; }
+.footer-brand-logo { margin-bottom: 16px; }
+.footer-logo-img { height: 52px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: .85; }
 .foot-col-title {
   font-family: 'Space Mono', monospace;
   font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--amber); margin-bottom: 20px; padding-bottom: 14px;
+  color: var(--orange); margin-bottom: 20px; padding-bottom: 14px;
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .foot-hours-row {
@@ -319,8 +322,8 @@ body {
   display: flex; align-items: center; gap: 10px;
   transition: color var(--ease);
 }
-.foot-svc-list li:hover { color: var(--amber-l); cursor: default; }
-.foot-svc-list li i { font-size: 12px; color: var(--amber); flex-shrink: 0; }
+.foot-svc-list li:hover { color: var(--orange-l); cursor: default; }
+.foot-svc-list li i { font-size: 12px; color: var(--orange); flex-shrink: 0; }
 .foot-bar { padding: 20px 0; }
 .foot-bar-inner {
   display: flex; justify-content: space-between; align-items: center; gap: 20px;
@@ -335,7 +338,7 @@ body {
   color: rgba(255,255,255,.28); text-decoration: none;
   transition: color var(--ease);
 }
-.foot-nav a:hover { color: var(--amber-l); }
+.foot-nav a:hover { color: var(--orange-l); }
 
 /* ══════════════════════════
    RESPONSIVE
@@ -343,6 +346,7 @@ body {
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .nav-ham   { display: none; }
+  .nav-logo-img { height: 44px; }
   .footer-grid { grid-template-columns: 1fr; gap: 36px; }
   .foot-bar-inner { flex-direction: column; gap: 10px; text-align: center; }
   .foot-nav { justify-content: center; flex-wrap: wrap; gap: 16px; }
@@ -378,13 +382,7 @@ body {
     <div class="navbar-inner">
 
       <a href="#" class="nav-logo">
-        <div class="nav-logo-icon">
-          <i class="fi fi-sr-print"></i>
-        </div>
-        <div class="nav-logo-text">
-          <span class="nav-logo-name">Hicksville Printing</span>
-          <span class="nav-logo-tag">Printing · Copies · Graphic Design · 516-933-1036</span>
-        </div>
+        <img src="logo.png" alt="Hicksville Printing" class="nav-logo-img" />
       </a>
 
       <div class="nav-links">
@@ -492,7 +490,7 @@ body {
     <div class="footer-grid">
 
       <div>
-        <div class="footer-brand-name">Hicksville Printing</div>
+        <div class="footer-brand-logo"><img src="logo.png" alt="Hicksville Printing" class="footer-logo-img" /></div>
         <div class="footer-brand-sub">Printing · Copies · Graphic Design</div>
         <div class="footer-address">
           545 South Broadway<br />
